@@ -1,8 +1,23 @@
-# Motivation
+# Distribute your policies with the power of OpenFaaS
 
-Let's clarify what is the motivation behind this demo first.
+Let's clarify what is the motivation behind this post first.
 
-## What is OPA (Open Policy Agent) ? 
+One of the feature OpenFaaS is [auto-scaling](https://docs.openfaas.com/architecture/autoscaling/) mechanism. The auto-scaling means is that you can scale up/down your function instances as demand increases. Also OpenFaaS provides 
+a feature called [zero-scale](https://docs.openfaas.com/architecture/autoscaling/#zero-scale). By enabling this feature , you can scaling to zero to recover idle resources is available in OpenFaaS.
+
+Using OpenFaaS as an OPA's Bundle API , you can have all the features by default with less effort.Also, you can't have to manage build/push and deploy phases with your Bundle API's .
+
+### What you will learn in this post ?
+
+In this post we are gonna learn:
+
+* [What is OPA (Open Policy Agent) ?](#whatisopa)
+* How can we deploy OPA co-located with our service ?
+* What is Rego ? (with a sample)
+* How can we create a OpenFaaS function and set it up as a Bundle API?
+* Demo
+
+### <a id="whatisopa"></a> What is OPA (Open Policy Agent) ?
 
 OPA describes itself as a general purpose policy engine, for more detail you can look at the official [documentation](https://www.openpolicyagent.org/docs/latest/).
 
