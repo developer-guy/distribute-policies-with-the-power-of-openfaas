@@ -1,0 +1,79 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-restful-api
+spec:
+  selector:
+    app: demo-restful-api
+  ports:
+    - name: http
+      protocol: TCP
+      targetPort: 5000
+      port: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-restful-api
+  name: demo-restful-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-restful-api
+  template:
+    metadata:
+      labels:
+        app: demo-restful-api
+      name: demo-restful-api
+    spec:
+      containers:
+        # WARNING: OPA is NOT running with an authorization policy configured. This
+        # means that clients can read and write policies in OPA. If you are
+        # deploying OPA in an insecure environment, be sure to configure
+        # authentication and authorization on the daemon. See the Security page for
+        # details: https://www.openpolicyagent.org/docs/security.html.
+        - name: opa
+          image: localhost:5000/opa:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - "run"
+            - "--server"
+            - "--addr=:8181"
+            - "--log-format=json-pretty"
+            - "--set=decision_logs.console=true"
+            - "--set=services.bundle.url=http://gateway.openfaas:8080/function/bundle-api"
+            - "--set=bundles.authz.service=bundle"
+            - "--set=bundles.authz.resource=policies/bundle.tar.gz"
+            - "--set=bundles.authz.polling.min_delay_seconds=60"
+            - "--set=bundles.authz.polling.max_delay_seconds=120"
+          ports:
+            - containerPort: 8181
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /health?bundles
+              scheme: HTTP
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              scheme: HTTP
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+        - name: api-server
+          image: localhost:5000/demo-restful-api:0.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              name: http
+          env:
+            - name: OPA_ADDR
+              value: http://127.0.0.1:8181
+            - name: POLICY_PATH
+              value: /v1/data/httpapi/authz
