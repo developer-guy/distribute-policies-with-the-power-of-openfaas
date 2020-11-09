@@ -1,5 +1,7 @@
 # Distribute your policies with the power of OpenFaaS
 
+![opa-power-openfaas](docs/opa-power-openfaas.png)
+
 Let's clarify what is the motivation behind this post first.
 
 One of the feature OpenFaaS is [auto-scaling](https://docs.openfaas.com/architecture/autoscaling/) mechanism. The auto-scaling means is that you can scale up/down your function instances as demand increases. Also OpenFaaS provides 
@@ -180,7 +182,7 @@ For this tutorial, our desired policy is:
 * People can see their own salaries (GET /finance/salary/{user} is permitted for {user})
 * A manager can see their direct reports’ salaries (GET /finance/salary/{user} is permitted for {user}’s manager)
 
-![authz.rego](functions/bundle-api/policies/authz-policy.png)
+![authz.rego](docs/authz-policy.png)
 
 ### Check that alice can see her own salary
 
