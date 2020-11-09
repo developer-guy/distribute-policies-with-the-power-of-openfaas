@@ -4,8 +4,8 @@
 
 Let's clarify what is the motivation behind this post first.
 
-One of the feature OpenFaaS is [auto-scaling](https://docs.openfaas.com/architecture/autoscaling/) mechanism. The auto-scaling means is that you can scale up/down your function instances as demand increases. Also OpenFaaS provides 
-a feature called [zero-scale](https://docs.openfaas.com/architecture/autoscaling/#zero-scale). By enabling this feature , you can scaling to zero to recover idle resources is available in OpenFaaS.
+One of the feature OpenFaaS is [auto-scaling](https://docs.openfaas.com/architecture/autoscaling/) mechanism. The auto-scaling means is that you can scale up/down your function instances as demand increases. Also, OpenFaaS provides 
+a feature called [zero-scale](https://docs.openfaas.com/architecture/autoscaling/#zero-scale). By enabling this feature , you can scale to zero to recover idle resources is available in OpenFaaS.
 
 Using OpenFaaS as an OPA's Bundle API , you can have all the features by default with less effort.Also, you can't have to manage build/push and deploy phases with your Bundle API's .
 
@@ -34,7 +34,7 @@ When it comes to deploying OPA, you have more than one option depending on your 
 * As a Go library
 * As a daemon
 
-The recommended way is to run OPA is as a daemon. The reason is that this design increases performance and availability.By default, all of the policy and data that OPA uses to make decisions is kept in-memory for the low-latency and we should colocate OPA and the service to avoid the network latency also.
+The recommended way is to run OPA is as a daemon. The reason is that this design increases performance and availability.By default, all the policy and data that OPA uses to make decisions is kept in-memory for the low-latency and we should colocate OPA and the service to avoid the network latency as well.
 
 ![opa-deploy-design](docs/opa-deploy-design.png)
 > Credit: https://www.magalix.com/blog/introducing-policy-as-code-the-open-policy-agent-opa
