@@ -180,7 +180,7 @@ For this tutorial, our desired policy is:
 * People can see their own salaries (GET /finance/salary/{user} is permitted for {user})
 * A manager can see their direct reports’ salaries (GET /finance/salary/{user} is permitted for {user}’s manager)
 
-![authz.rego](docs/authz-policy.png)
+![authz.rego](functions/bundle-api/policies/authz-policy.png)
 
 ### Check that alice can see her own salary
 
