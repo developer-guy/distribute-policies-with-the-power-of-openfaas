@@ -1,0 +1,5 @@
+{
+  "user": "alice",
+  "path": ["finance", "salary", "alice"],
+  "method": "GET"
+}
